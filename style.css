@@ -1,3 +1,41 @@
+input[type=text]{
+  width:100%;
+  border:2px solid #aaa;
+  border-radius:4px;
+  margin:8px 0;
+  outline:none;
+  padding:8px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+h1 {
+  font-family: Helvetica, sans-serif;
+}
+
+input[type=text]:focus{
+  border-color:dodgerBlue;
+  box-shadow:0 0 8px 0 dodgerBlue;
+}
+
+img {
+  width: 30%;
+  height: auto;
+  border-radius: 15px;
+}
+
 .headline {
-  border-style: dotted;
+  font-family: Helvetica, sans-serif;
+  width: auto;
+  display: block;
+  padding: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.headline:hover {
+  background-color: rgba(209, 209, 209, 0.38);
+}
+
+a {
+  display: block;
 }

@@ -38,7 +38,14 @@ describe('View', () => {
     view.displayHeadlines().then(() => {
       const firstHeadline = document.querySelector('.headline');
       expect(firstHeadline.childNodes[0].src).toBe('https://mockedthumbnail1.com/');
-      expect(firstHeadline.childNodes[1].innerHTML).toBe('Mocked Headline 1');
+      expect(firstHeadline.childNodes[1].textContent).toBe('Mocked Headline 1');
+    });
+  });
+
+  test('#displayHeadlines - Headlines have hyperlinks to the Guardian', () => {
+    view.displayHeadlines().then(() => {
+      const firstHeadline = document.querySelector('.headline');
+      expect(firstHeadline.children[1].href).toBe('https://www.mockedheadline1.com/')
     });
   });
 })
