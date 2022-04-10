@@ -9,9 +9,10 @@ const mockAPIResponse = require('./mockAPIResponse');
 
 jest.mock('./api');
 
-describe('View', (done) => {
+describe('View', () => {
+  let view;
 
-  test('#displayHeadlines - Current Headlines are displayed on page load', () => {
+  beforeEach(() => {
     document.body.innerHTML = fs.readFileSync("./index.html");
     API.mockImplementation(() => {
       return {
@@ -20,14 +21,24 @@ describe('View', (done) => {
         }
       }
     })
-    const api = new API;
-    const view = new View(api);
+    const mockAPI = new API;
+    view = new View(mockAPI);
+  });
+
+  test('#displayHeadlines - multiple headline titles are displayed', () => {
     view.displayHeadlines().then(() => {
       const headlineContainer = document.querySelector('#headline-container');
-      expect(headlineContainer.children[0].innerHTML).toBe('Mocked API Response Headline');
-      expect(headlineContainer.children[1].innerHTML).toBe('Second Headline');
-      expect(headlineContainer.children[2].innerHTML).toBe('Third Headline');
+      expect(headlineContainer.children[0].textContent).toBe('Mocked Headline 1');
+      expect(headlineContainer.children[1].textContent).toBe('Mocked Headline 2');
+      expect(headlineContainer.children[2].textContent).toBe('Mocked Headline 3');
     });
+  });
 
-  })
+  test('#displayHeadlines - Headline Images are displayed', () => {
+    view.displayHeadlines().then(() => {
+      const firstHeadline = document.querySelector('.headline');
+      expect(firstHeadline.childNodes[0].src).toBe('https://mockedthumbnail1.com/');
+      expect(firstHeadline.childNodes[1].innerHTML).toBe('Mocked Headline 1');
+    });
+  });
 })

@@ -8,9 +8,20 @@ class View {
     .then(feed => {
       const headlineContainer = document.querySelector('#headline-container');
       feed.response.results.forEach(article => {
-        const newHeadlineEl = document.createElement('h1');
-        newHeadlineEl.innerHTML = article.webTitle;
-        headlineContainer.append(newHeadlineEl);
+        const newHeadlineDiv = document.createElement('div')
+        newHeadlineDiv.className = 'headline';
+
+        const newHeadlineImg = document.createElement('img')
+
+        newHeadlineImg.src = article.fields.thumbnail
+
+        const newHeadlineHeader = document.createElement('h1');
+        newHeadlineHeader.innerHTML = article.webTitle;
+        
+        newHeadlineDiv.append(newHeadlineImg);
+        newHeadlineDiv.append(newHeadlineHeader)
+
+        headlineContainer.append(newHeadlineDiv);
       })
     })
   }
