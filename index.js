@@ -1,3 +1,7 @@
-const apiKey = require('./env.js')
+const API = require('./api');
+const View = require('./view');
 
-console.log(apiKey)
+const api = new API();
+const view = new View(api);
+
+view.displayHeadlines();
