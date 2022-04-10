@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const fs = require("fs");
+const fs = require('fs');
 const View = require('./view');
 const API = require('./api');
 const mockAPIResponse = require('./mockAPIResponse');
@@ -13,15 +13,11 @@ describe('View', () => {
   let view;
 
   beforeEach(() => {
-    document.body.innerHTML = fs.readFileSync("./index.html");
-    API.mockImplementation(() => {
-      return {
-        loadFeed: () => {
-          return Promise.resolve(mockAPIResponse);
-        }
-      }
-    })
-    const mockAPI = new API;
+    document.body.innerHTML = fs.readFileSync('./index.html');
+    API.mockImplementation(() => ({
+      loadFeed: () => Promise.resolve(mockAPIResponse),
+    }));
+    const mockAPI = new API();
     view = new View(mockAPI);
   });
 
@@ -45,7 +41,7 @@ describe('View', () => {
   test('#displayHeadlines - Headlines have hyperlinks to the Guardian', () => {
     view.displayHeadlines().then(() => {
       const firstHeadline = document.querySelector('.headline');
-      expect(firstHeadline.children[1].href).toBe('https://www.mockedheadline1.com/')
+      expect(firstHeadline.children[1].href).toBe('https://www.mockedheadline1.com/');
     });
   });
-})
+});
